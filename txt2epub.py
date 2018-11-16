@@ -299,7 +299,8 @@ if __name__ == "__main__":
     pre_chap_title = ''
     frontpage = 0
 
-    bookfile = open('{bname}.txt'.format(bname=bookname), 'r',encoding='utf-8')
+    bookfile = open('{bname}.txt'.format(
+        bname=bookname), 'r', encoding='utf-8')
     for linenum, line in enumerate(bookfile.readlines()):
         line = line.strip()
         if len(line):
@@ -335,7 +336,8 @@ if __name__ == "__main__":
         makechapterhtml(outputfolder, chapter, chapternum)
         manifest += '        <item id="chapter_{:0>4d}" href="Text/{:0>4d}.xhtml" media-type="application/xhtml+xml"/>\n'.format(
             chapternum, chapternum)
-        spine += '        <itemref idref="chapter_{:0>4d}" />\n'.format(chapternum)
+        spine += '        <itemref idref="chapter_{:0>4d}" />\n'.format(
+            chapternum)
 
         olli += '''<li id="chapter_{:0>4d}">
           <a href="../Text/{:0>4d}.xhtml">{chaptitle}</a>
@@ -380,7 +382,8 @@ if __name__ == "__main__":
         bname=bookname)), "w", zipfile.ZIP_DEFLATED)
 
     out.write(epubfolder + "/mimetype", "mimetype", zipfile.ZIP_STORED)
-    out.write(epubfolder + "/META-INF/container.xml", "META-INF/container.xml", zipfile.ZIP_DEFLATED)
+    out.write(epubfolder + "/META-INF/container.xml",
+              "META-INF/container.xml", zipfile.ZIP_DEFLATED)
 
     for root, dirs, files in os.walk(epubfolder):
         for name in files:
