@@ -321,14 +321,14 @@ if __name__ == "__main__":
 
     chapters.append((chaptername, chaptercontent))
 
-#        EPUB2, abandon in EPUB3
+    # EPUB2, abandon in EPUB3
     manifest = '<item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>\n'
     manifest += '        <item id="toc" properties="nav" href="Text/nav.xhtml" media-type="application/xhtml+xml"/>\n'
     manifest += '        <item id="css" href="Styles/stylesheet.css" media-type="text/css"/>\n'
     spine = ''
     olli = ''
 
-#        EPUB2, abandon in EPUB3
+    # EPUB2, abandon in EPUB3
     navpoint = ''
     # chapter_file_list = []
 
@@ -344,7 +344,7 @@ if __name__ == "__main__":
         </li>
           '''.format(chapternum, chapternum, chaptitle=chapter[0])
 
-#        EPUB2, abandon in EPUB3
+    # EPUB2, abandon in EPUB3
         navpoint += '''    <navPoint class="chapter" id="chapter_{seq}" playOrder="{chapnum}">
         <navLabel>
         <text>{chaptitle}</text>
@@ -360,7 +360,7 @@ if __name__ == "__main__":
     # write package.opf
     writeopffile(outputfolder, manifest, spine)
 
-#   EPUB2, abandon in EPUB3
+    # EPUB2, abandon in EPUB3
     # write toc.ncx
     writencxfile(outputfolder, navpoint)
 
