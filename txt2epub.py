@@ -57,16 +57,38 @@ def make_new_epub_folder(options):
     return True
 
 
+def zh2unicode(stri):
+    """Auto converter encodings to unicode
+    It will test utf8,gbk,big5,jp,kr to converter"""
+    for c in ('utf-8', 'gbk', 'big5', 'jp', 'euc_kr', 'utf16', 'utf32'):
+        try:
+            return stri.decode(c)
+        except:
+            pass
+    return stri
+
+
+def zh2utf8(stri):
+    """Auto converter encodings to utf8
+    It will test utf8,gbk,big5,jp,kr to converter"""
+    for c in ('utf-8', 'gbk', 'big5', 'jp', 'euc_kr', 'utf16', 'utf32'):
+        try:
+            return stri.decode(c).encode('utf8')
+        except:
+            pass
+    return stri
+
+
 def is_chapter_title(line):
     # if re.match(ur"[正文]*\s*[第终][0123456789一二三四五六七八九十百千万零 　\s]*[章部集节卷]", unicode(line,'utf-8')) :
-    reg1 = re.compile(r"\s*[第终][0123456789一二三四五六七八九十百千万零 　\s]*[章部集节卷]")
+    reg1 = re.compile(r'\s*[第终][0123456789一二三四五六七八九十百千万零 　\s]*[章部集节卷]')
     reg2 = re.compile(r'^[0-9]{1,4} .*')
     reg3 = re.compile(r'^\s*[第终卷][0123456789一二三四五六七八九十零〇百千两]*[章回部节集卷].*')
-    if reg1.match(line):
+    if reg1.match(zh2utf8(line)):
         return True
-    elif reg2.match(line):
+    elif reg2.match(zh2utf8(line)):
         return True
-    elif reg3.match(line):
+    elif reg3.match(zh2utf8(line)):
         return True
     else:
         return False
@@ -299,11 +321,11 @@ if __name__ == "__main__":
     pre_chap_title = ''
     frontpage = 0
 
-    bookfile = open('{bname}.txt'.format(
-        bname=bookname), 'r', encoding='utf-8')
+    bookfile = open('{bname}.txt'.format(bname=bookname), 'r')
     for linenum, line in enumerate(bookfile.readlines()):
         line = line.strip()
         if len(line):
+            line = zh2utf8(line)
             if is_chapter_title(line):
                 pre_chap_title = chaptername
                 chaptername = line
