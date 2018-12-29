@@ -84,11 +84,14 @@ def is_chapter_title(line):
     reg1 = re.compile(r'\s*[第终][0123456789一二三四五六七八九十百千万零 　\s]*[章部集节卷]')
     reg2 = re.compile(r'^[0-9]{1,4} .*')
     reg3 = re.compile(r'^\s*[第终卷][0123456789一二三四五六七八九十零〇百千两]*[章回部节集卷].*')
+    reg4 = re.compile(r'^[ 　\t]*((\s*#+ )|(第\s*[0-9零一二三四五六七八九十百]{1,6}\s*[卷章节回])).*')
     if reg1.match(zh2utf8(line)):
         return True
     elif reg2.match(zh2utf8(line)):
         return True
     elif reg3.match(zh2utf8(line)):
+        return True
+    elif reg4.match(zh2utf8(line)):
         return True
     else:
         return False
