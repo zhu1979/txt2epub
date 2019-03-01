@@ -343,8 +343,8 @@ if __name__ == "__main__":
                 chaptercontent = ''
             else:
                 chaptercontent += '        <p>'+'　　'+line+'</p>\n'
-
     chapters.append((chaptername, chaptercontent))
+    bookfile.close()
 
     # EPUB2, abandon in EPUB3
     manifest = '<item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>\n'
