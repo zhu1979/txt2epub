@@ -241,8 +241,6 @@ def writeopffile(filepath, manifest, spine):
             'spine': spine,
         })
 
-# EPUB2 NCX file, abandoned in EPUB3
-
 
 def writencxfile(filepath, navpoint):
     index_ncx = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -270,8 +268,6 @@ def writencxfile(filepath, navpoint):
             'artname': author,
             'navpoint': navpoint,
         })
-
-# EPUB3 END file
 
 
 def writenavfile(filepath, olli):
